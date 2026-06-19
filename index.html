@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trending Academy Limited</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,sans-serif;
+  background:#020617;
+  color:#fff;
+  overflow-x:hidden;
+}
+:root{
+  --pic:url("https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic1.gif");
+}
+
+/* Loading */
+#loader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,215,0,.32),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(56,189,248,.28),transparent 35%),
+    #020617;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transition:.4s;
+}
+.loaderCircle{
+  width:78px;height:78px;
+  margin:0 auto 22px;
+  border-radius:50%;
+  border:5px solid rgba(255,255,255,.15);
+  border-top-color:#ffd700;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loaderBox h1{
+  color:#ffd700;
+  font-size:clamp(28px,7vw,48px);
+  margin-bottom:10px;
+  white-space:nowrap;
+}
+.loaderLogo{
+  margin-top:-25px;
+  margin-bottom:18px;
+}
+
+.loaderLogo{
+  margin-top:-25px;
+  margin-bottom:18px;
+}
+
+.loaderLogo img{
+  width:160px;
+  height:160px;
+  border-radius:20px; /* square with rounded corners */
+  object-fit:cover;
+  border:4px solid #ffd700;
+  box-shadow:
+    0 0 20px rgba(255,215,0,.5),
+    0 0 40px rgba(56,189,248,.3);
+  animation:logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+}
+
+.loaderSub{
+  color:#22c55e;
+  font-size:16px;
+  font-weight:800;
+  margin-top:8px;
+}
+
+.loaderSub.small{
+  color:#38bdf8;
+  font-size:14px;
+}
+
+.progressBox{
+  width:260px;
+  height:10px;
+  background:rgba(255,255,255,.15);
+  border-radius:20px;
+  margin:20px auto 10px;
+  overflow:hidden;
+}
+
+.progressBar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#ffd700,#22c55e,#38bdf8);
+}
+
+#percent{
+  color:#fff;
+  font-size:18px;
+  font-weight:900;
+}
+
+/* Gorgeous Wedding Background */
+.bgBase,.bgLight,.bgBokeh,.bgRibbon,.bgGrid{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+}
+.bgBase{
+  z-index:-7;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(255,215,0,.22),transparent 28%),
+    radial-gradient(circle at 85% 20%,rgba(236,72,153,.18),transparent 30%),
+    radial-gradient(circle at 50% 88%,rgba(56,189,248,.18),transparent 36%),
+    linear-gradient(180deg,#07142d,#14051f 55%,#020617);
+}
+.bgLight{
+  z-index:-6;
+  background-image:
+    radial-gradient(circle,#ffd700 1px,transparent 3px),
+    radial-gradient(circle,#38bdf8 1px,transparent 3px),
+    radial-gradient(circle,#ff4fd8 1px,transparent 3px);
+  background-size:80px 80px,125px 125px,170px 170px;
+  animation:lightMove 24s linear infinite;
+  opacity:.55;
+}
+@keyframes lightMove{
+  from{background-position:0 0,0 0,0 0}
+  to{background-position:220px 300px,-210px 180px,150px -230px}
+}
+.bgBokeh{
+  z-index:-5;
+  background:
+    radial-gradient(circle at 10% 70%,rgba(255,215,0,.25),transparent 9%),
+    radial-gradient(circle at 90% 35%,rgba(34,197,94,.20),transparent 10%),
+    radial-gradient(circle at 50% 50%,rgba(59,130,246,.20),transparent 11%);
+  animation:bokehMove 12s ease-in-out infinite alternate;
+  opacity:.75;
+}
+@keyframes bokehMove{
+  from{transform:translateY(0) scale(1)}
+  to{transform:translateY(-25px) scale(1.05)}
+}
+.bgRibbon{
+  z-index:-4;
+  background:
+    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.08) 45%,transparent 57%),
+    linear-gradient(65deg,transparent 0%,rgba(255,215,0,.10) 45%,transparent 58%);
+  background-size:360px 360px;
+  animation:ribbonMove 15s linear infinite;
+}
+@keyframes ribbonMove{
+  from{background-position:-360px 0,360px 0}
+  to{background-position:560px 0,-560px 0}
+}
+.bgGrid{
+  z-index:-3;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:46px 46px;
+}
+
+/* Header */
+header{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:9999;
+  background:rgba(2,6,23,.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+.nav{
+  max-width:1300px;
+  margin:auto;
+  height:72px;
+  padding:0 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.logo{
+  font-size:clamp(16px,4.5vw,25px);
+  font-weight:1000;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  background:linear-gradient(90deg,#ffd700,#38bdf8,#22c55e);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.menuIcon{
+  width:46px;height:46px;
+  min-width:46px;
+  border-radius:15px;
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.23);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  cursor:pointer;
+}
+.menuIcon span{
+  width:25px;height:3px;
+  background:#ffd700;
+  border-radius:10px;
+}
+
+/* Ticker */
+.ticker{
+  position:fixed;
+  top:72px;
+  left:0;right:0;
+  z-index:9997;
+  height:34px;
+  background:linear-gradient(90deg,#f59e0b,#2563eb,#22c55e,#ec4899);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+}
+.ticker p{
+  white-space:nowrap;
+  font-weight:900;
+  animation:tickerMove 30s linear infinite;
+  font-size:14px;
+}
+@keyframes tickerMove{
+  from{transform:translateX(100vw)}
+  to{transform:translateX(-100%)}
+}
+
+/* Menu */
+.menuBox{
+  position:fixed;
+  inset:106px 0 0 0;
+  background:rgba(2,6,23,.97);
+  display:none;
+  z-index:9998;
+  padding:22px 15px;
+  overflow:auto;
+}
+.menuBox.active{display:block}
+.menuInner{
+  max-width:850px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+.menuBox button,.menuBox a{
+  width:100%;
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:white;
+  padding:14px;
+  border-radius:22px;
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.15);
+  font-weight:900;
+  text-align:center;
+  cursor:pointer;
+  font-size:clamp(14px,3vw,17px);
+  white-space:nowrap;
+}
+
+/* WebView */
+.webviewBox{
+  display:none;
+  position:fixed;
+  top:106px;left:0;right:0;bottom:0;
+  z-index:9000;
+  background:#020617;
+}
+.webviewTop{
+  height:52px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  background:rgba(2,6,23,.98);
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+.webviewTop button{
+  border:none;
+  padding:10px 14px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#2563eb,#22c55e);
+  color:white;
+  font-weight:900;
+}
+.webviewTop span{
+  color:#cbd5e1;
+  font-weight:900;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.webviewBox iframe{
+  width:100%;
+  height:calc(100% - 52px);
+  border:none;
+  background:white;
+}
+.page{padding-top:106px}
+
+/* Hero clear long cover */
+.hero{
+  min-height:92vh;
+  display:flex;
+  align-items:center;
+  padding:80px 15px 65px;
+  position:relative;
+  overflow:hidden;
+  background:var(--pic) center/cover no-repeat;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(2,6,23,.72),rgba(2,6,23,.25),rgba(2,6,23,.72)),
+    linear-gradient(180deg,rgba(2,6,23,.25),rgba(2,6,23,.72));
+  z-index:0;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,215,0,.18),transparent 30%),
+    radial-gradient(circle at 80% 30%,rgba(56,189,248,.15),transparent 32%);
+  z-index:1;
+}
+.heroBox{
+  max-width:980px;
+  margin:auto;
+  text-align:center;
+  position:relative;
+  z-index:2;
+}
+.badge{
+  display:inline-block;
+  padding:11px 18px;
+  border-radius:30px;
+  background:rgba(255,215,0,.18);
+  border:1px solid rgba(255,215,0,.45);
+  color:#fde68a;
+  margin-bottom:18px;
+  font-weight:900;
+  white-space:nowrap;
+  font-size:clamp(12px,3vw,16px);
+}
+.hero h1{
+  font-size:clamp(32px,7vw,66px);
+  line-height:1.08;
+  text-shadow:0 0 22px rgba(0,0,0,.85);
+}
+.hero h1 span{
+  color:#22c55e;
+  text-shadow:0 0 24px rgba(34,197,94,.75);
+}
+.hero p{
+  margin-top:20px;
+  color:#fff;
+  font-size:clamp(14px,3.4vw,19px);
+  line-height:1.85;
+  text-shadow:0 0 16px rgba(0,0,0,.8);
+}
+.btns{
+  margin-top:30px;
+  display:flex;
+  gap:13px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.btn{
+  border:none;
+  cursor:pointer;
+  text-decoration:none;
+  color:white;
+  padding:15px 24px;
+  border-radius:35px;
+  font-weight:1000;
+  background:linear-gradient(135deg,#2563eb,#22c55e);
+  font-size:clamp(13px,3vw,15px);
+  white-space:nowrap;
+}
+.btn.gold{
+  background:linear-gradient(135deg,#f59e0b,#ec4899,#2563eb);
+  animation:createPulse 1.8s ease-in-out infinite;
+}
+.btn.loginBlue{
+  background:linear-gradient(135deg,#0ea5e9,#2563eb,#1d4ed8);
+  border:1px solid rgba(56,189,248,.45);
+  animation:loginGlow 1.8s ease-in-out infinite;
+}
+@keyframes createPulse{
+  0%,100%{transform:translateY(0);box-shadow:0 0 0 rgba(245,158,11,0)}
+  50%{transform:translateY(-3px);box-shadow:0 0 28px rgba(245,158,11,.35)}
+}
+@keyframes loginGlow{
+  0%,100%{transform:translateY(0);box-shadow:0 0 0 rgba(14,165,233,0)}
+  50%{transform:translateY(-3px);box-shadow:0 0 28px rgba(14,165,233,.42)}
+}
+
+/* Common */
+.section{padding:78px 15px}
+.title{
+  max-width:850px;
+  margin:0 auto 38px;
+  text-align:center;
+}
+.title h2{
+  font-size:clamp(28px,6vw,44px);
+  color:#38bdf8;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.title p{
+  margin-top:12px;
+  color:#d1d5db;
+  line-height:1.8;
+  font-size:clamp(13px,3.3vw,16px);
+}
+.stats,.cards,.achievements,.reviews,.faq,.storeGrid,.socialGrid{
+  max-width:1300px;
+  margin:auto;
+}
+
+/* Stats */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.stat,.card,.achievement,.review,.faqItem,.termsBox{
+  background:rgba(255,255,255,.085);
+  border:1px solid rgba(255,255,255,.14);
+}
+.stat{
+  padding:26px;
+  border-radius:26px;
+  text-align:center;
+}
+.stat h2{font-size:clamp(26px,5vw,36px);color:#ffd700;white-space:nowrap}
+.stat p{color:#cbd5e1;margin-top:8px;white-space:nowrap;font-size:clamp(11px,2.8vw,16px)}
+
+/* Services */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.card{
+  padding:16px;
+  border-radius:28px;
+}
+.card img{
+  width:100%;
+  height:225px;
+  object-fit:cover;
+  border-radius:22px;
+  margin-bottom:15px;
+}
+.card h3{
+  color:#22c55e;
+  font-size:clamp(18px,4vw,23px);
+  margin-bottom:10px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.card p{color:#d1d5db;line-height:1.75;font-size:clamp(13px,3vw,16px)}
+
+/* Achievement */
+.achievements{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.achievement{
+  padding:24px;
+  border-radius:26px;
+  text-align:center;
+}
+.achievement h3{
+  color:#ffd700;
+  margin-bottom:10px;
+  white-space:nowrap;
+  font-size:clamp(16px,3.5vw,21px);
+}
+.achievement p{
+  color:#d1d5db;
+  line-height:1.7;
+  font-size:clamp(12px,3vw,15px);
+}
+
+/* Banner */
+.banner{
+  max-width:1300px;
+  margin:auto;
+  min-height:450px;
+  border-radius:38px;
+  background:
+    linear-gradient(90deg,rgba(2,6,23,.78),rgba(2,6,23,.15)),
+    var(--pic) center/cover no-repeat;
+  border:1px solid rgba(255,255,255,.18);
+  position:relative;
+  overflow:hidden;
+}
+.bannerText{
+  position:absolute;
+  left:32px;right:32px;bottom:32px;
+  max-width:720px;
+}
+.bannerText h2{
+  font-size:clamp(28px,6vw,46px);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.bannerText p{margin-top:14px;color:#d1d5db;line-height:1.85}
+
+/* Colorful Gallery */
+.gallery{
+  max-width:1300px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+}
+.photoCard{
+  border-radius:26px;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(255,215,0,.16),rgba(236,72,153,.10),rgba(56,189,248,.12));
+  border:1px solid rgba(255,255,255,.18);
+}
+.photo{
+  min-height:215px;
+  background:var(--pic) center/cover no-repeat;
+}
+.photoInfo{
+  padding:13px 12px 14px;
+  text-align:center;
+  background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(56,189,248,.10),rgba(236,72,153,.12));
+}
+.photoTitle{
+  font-weight:1000;
+  color:#ffd700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-size:clamp(12px,3vw,15px);
+}
+.photoSub{
+  margin-top:5px;
+  color:#dbeafe;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-size:clamp(10px,2.6vw,13px);
+}
+.photoCard.big{grid-column:span 2;grid-row:span 2}
+.photoCard.big .photo{min-height:445px}
+.photoCard.wide{grid-column:span 2}
+
+/* Reviews */
+.reviews{
+  display:flex;
+  gap:18px;
+  overflow:hidden;
+}
+.reviewTrack{
+  display:flex;
+  gap:18px;
+  animation:reviewMove 30s linear infinite;
+}
+@keyframes reviewMove{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+.review{
+  min-width:300px;
+  border-radius:26px;
+  padding:22px;
+}
+.review h3{
+  color:#ffd700;
+  margin-bottom:8px;
+  white-space:nowrap;
+}
+.review p{
+  color:#d1d5db;
+  line-height:1.7;
+}
+
+/* FAQ */
+.faq{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.faqItem{
+  border-radius:22px;
+  overflow:hidden;
+}
+.faqQ{
+  padding:18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#ffd700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.faqA{
+  display:none;
+  padding:0 18px 18px;
+  color:#d1d5db;
+  line-height:1.7;
+}
+.faqItem.active .faqA{display:block}
+
+/* Terms */
+.termsBox{
+  max-width:1000px;
+  margin:auto;
+  border-radius:26px;
+  padding:26px;
+}
+.termsBox h3{color:#ffd700;margin-bottom:12px}
+.termsBox p{color:#d1d5db;line-height:1.8;margin-bottom:10px}
+
+/* Footer */
+.footer{
+  padding:90px 15px 35px;
+  background:
+    radial-gradient(circle at top left,rgba(255,215,0,.18),transparent 30%),
+    radial-gradient(circle at bottom right,rgba(56,189,248,.18),transparent 35%),
+    linear-gradient(180deg,rgba(2,6,23,.20),#020617 45%,#000);
+  border-top:1px solid rgba(255,255,255,.16);
+}
+.footerBox{
+  max-width:1300px;
+  margin:auto;
+  border-radius:38px;
+  padding:30px;
+  background:linear-gradient(135deg,rgba(255,255,255,.11),rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.18);
+}
+.footerTop{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:22px;
+  align-items:center;
+  margin-bottom:26px;
+}
+.footerBrand{
+  padding:24px;
+  border-radius:26px;
+  background:
+    linear-gradient(135deg,rgba(255,215,0,.13),rgba(56,189,248,.08)),
+    var(--pic) center/cover no-repeat;
+  border:1px solid rgba(255,255,255,.16);
+  min-height:220px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+  position:relative;
+}
+.footerBrand::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(2,6,23,.35),rgba(2,6,23,.88));
+}
+.footerBrand h2,.footerBrand p{position:relative;z-index:1}
+.footerBrand h2{
+  font-size:clamp(28px,6vw,42px);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  background:linear-gradient(90deg,#ffd700,#38bdf8,#22c55e);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.footerBrand p{color:#e5e7eb;margin-top:10px;line-height:1.7}
+.footerInfo{
+  padding:24px;
+  border-radius:26px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+}
+.footerInfo h3{color:#ffd700;margin-bottom:12px;font-size:24px;white-space:nowrap}
+.footerInfo p{color:#d1d5db;line-height:1.8}
+
+.storeGrid,.socialGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-top:20px;
+}
+.store,.social{
+  text-decoration:none;
+  color:white;
+  min-height:118px;
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,.15),rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.16);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  font-weight:1000;
+  text-align:center;
+  font-size:clamp(12px,2.8vw,16px);
+  white-space:nowrap;
+  overflow:hidden;
+  padding:8px;
+}
+.logoImg{
+  width:52px;
+  height:52px;
+  border-radius:16px;
+  object-fit:cover;
+  background:#fff;
+  padding:6px;
+}
+.logoImg[src=""],.logoImg:not([src]){
+  display:none;
+}
+.logoFallback{
+  width:52px;
+  height:52px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#ffd700,#2563eb,#22c55e);
+  color:#fff;
+  font-size:24px;
+  font-weight:1000;
+}
+
+/* Store Badges */
+.badgeStores{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+.storeBadge{
+  text-decoration:none;
+  min-height:88px;
+  border-radius:22px;
+  background:#050505;
+  border:1px solid rgba(255,255,255,.25);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:12px;
+}
+.storeBadge img{
+  width:46px;
+  height:46px;
+  object-fit:contain;
+  border-radius:10px;
+  background:#fff;
+  padding:5px;
+}
+.storeBadge div{
+  line-height:1.2;
+  white-space:nowrap;
+}
+.storeBadge small{
+  display:block;
+  font-size:11px;
+  color:#cbd5e1;
+}
+.storeBadge strong{
+  font-size:clamp(15px,3vw,20px);
+}
+
+/* Footer Slider */
+.verifySlider{
+  margin-top:30px;
+  overflow:hidden;
+  border-radius:24px;
+}
+.verifyTrack{
+  display:flex;
+  gap:15px;
+  width:max-content;
+  animation:verifyMove 28s linear infinite;
+}
+.verifySlide{
+  width:300px;
+  padding:20px;
+  border-radius:24px;
+  background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(56,189,248,.09));
+  border:1px solid rgba(34,197,94,.28);
+  text-align:center;
+}
+.verifySlide h3{
+  color:#22c55e;
+  margin-bottom:7px;
+  white-space:nowrap;
+  font-size:clamp(14px,3vw,17px);
+}
+.verifySlide p{
+  color:#d1d5db;
+  font-size:14px;
+  line-height:1.6;
+}
+@keyframes verifyMove{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* Premium Company Center */
+
+.companyCenter{
+  max-width:620px;
+  margin:25px auto 0;
+  padding:18px;
+  border-radius:26px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,
+  rgba(255,255,255,.12),
+  rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(12px);
+  box-shadow:0 0 35px rgba(56,189,248,.15);
+}
+
+.companyCenter::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  z-index:-1;
+  border-radius:28px;
+  background:linear-gradient(
+  90deg,
+  #ffd700,
+  #38bdf8,
+  #22c55e,
+  #ec4899,
+  #ffd700);
+  background-size:300%;
+  animation:borderGlow 25s linear infinite;
+}
+
+@keyframes borderGlow{
+  from{background-position:0%}
+  to{background-position:300%}
+}
+
+.companyCenter::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:80%;
+  height:100%;
+  background:linear-gradient(
+  90deg,
+  transparent,
+  rgba(255,255,255,.18),
+  transparent);
+  animation:shine 5s ease-in-out infinite;
+}
+
+@keyframes shine{
+  0%{left:-120%}
+  50%{left:130%}
+  100%{left:130%}
+}
+
+.companyCenter h3{
+  color:#ffd700;
+  font-size:clamp(20px,5vw,26px);
+  margin-bottom:12px;
+  white-space:nowrap;
+}
+
+.footerLine{
+  padding:2px 0;
+  color:#ffffff;
+  font-size:clamp(15px,4vw,18px);
+  font-weight:800;
+  letter-spacing:.1px;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.35),
+    0 0 15px rgba(255,215,0,.25);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.footerLine:first-of-type{
+  color:#ffd700;
+  font-size:clamp(16px,4.5vw,20px);
+  font-weight:900;
+}
+
+.footerLine:last-child{
+  border-bottom:none;
+  color:#38bdf8;
+}
+
+.footerBottom{
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.10);
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  text-align:center;
+  color:#cbd5e1;
+  font-size:14px;
+}
+
+.footerBottom span{
+  color:#ffd700;
+  font-weight:900;
+}
+
+/* Floating WhatsApp only */
+.floatWhatsapp{
+  position:fixed;
+  right:14px;
+  bottom:18px;
+  z-index:9990;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  color:white;
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  font-size:26px;
+  font-weight:900;
+  box-shadow:0 10px 28px rgba(34,197,94,.35);
+}
+
+/* Mobile */
+@media(max-width:950px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cards{grid-template-columns:1fr}
+  .achievements{grid-template-columns:repeat(2,1fr)}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .photoCard.big,.photoCard.wide{grid-column:span 1}
+  .photoCard.big .photo{min-height:230px}
+  .footerTop{grid-template-columns:1fr}
+  .storeGrid,.socialGrid{grid-template-columns:repeat(2,1fr)}
+  .menuInner{grid-template-columns:1fr}
+  .faq{grid-template-columns:1fr}
+  .badgeStores{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .nav{height:68px}
+  .ticker{top:68px}
+  .page{padding-top:102px}
+  .webviewBox{top:102px}
+  .menuBox{inset:102px 0 0 0}
+  .hero{padding-top:70px}
+  .stats,.gallery{grid-template-columns:1fr}
+  .achievements{grid-template-columns:1fr}
+  .storeGrid,.socialGrid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .store,.social{min-height:95px;border-radius:18px;font-size:12px;padding:6px}
+  .logoImg,.logoFallback{width:42px;height:42px;border-radius:13px;padding:5px}
+  .banner{min-height:370px}
+  .bannerText{left:22px;right:22px;bottom:22px}
+  .btn{padding:13px 18px;font-size:13px}
+  .footerBox{padding:18px;border-radius:28px}
+  .footerBrand,.footerInfo{padding:18px;border-radius:22px}
+  .companyGrid{grid-template-columns:1fr}
+  .verifySlide{width:260px}
+}
+</style>
+</head>
+
+<body onload="startPage()">
+
+<div id="loader">
+  <div class="loaderBox">
+
+    <div class="loaderLogo">
+      <img src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/robot.gif" alt="">
+    </div>
+
+    <div class="loaderCircle"></div>
+
+    <h1>Assalamualaikum</h1>
+
+    <p>Welcome to Trending Academy Limited</p>
+
+    <div class="loaderSub">
+     📡 Connecting to our server....
+    </div>
+
+    <div class="loaderSub small">
+      Learn • Grow • Earn • Success
+    </div>
+
+    <div class="progressBox">
+      <div class="progressBar" id="progressBar"></div>
+    </div>
+
+    <div id="percent">0%</div>
+
+  </div>
+</div>
+
+<div class="bgBase"></div>
+<div class="bgLight"></div>
+<div class="bgBokeh"></div>
+<div class="bgRibbon"></div>
+<div class="bgGrid"></div>
+
+<header>
+  <div class="nav">
+    <div class="logo">Trending Academy Limited</div>
+    <div class="menuIcon" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<div class="ticker">
+  <p>📢 Trending Academy Limited — কাজ করো বন্ধু, কিন্তু নামাজ ছেড়ো না। রিজিকের জন্য পরিশ্রম করো, কিন্তু রিজিকদাতাকে ভুলে যেও না। মনে রেখো, কুল্লু নাফসিন যা ইকাতুল মাউত ( ‎‫كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ‬‎) অর্থ্যাৎ "প্রত্যেক প্রাণীকেই মৃত্যুর স্বাদ গ্রহণ করতে হবে।"</p>
+</div>
+
+<div class="menuBox" id="menuBox">
+  <div class="menuInner">
+    <a href="#home" onclick="closeWebView()">🏠 Home</a>
+    <button onclick="window.open('https://ariyanth1000-jpg.github.io/New-Student-sign-up/','Sign Up')">📝Student Sign Up</button>
+    <button onclick="window.open('https://ariyanth1000-jpg.github.io/Student-Login-/','Login')">🔐 Student Login</button>
+    <button onclick="window.open('https://ariyanth1000-jpg.github.io/sub-admin/','Sub Admin Login')">⭐ SUB ADMIN LOGIN </button>
+    <button onclick="window.open('https://ariyanth1000-jpg.github.io/Admin-login/','Admin Panel')">👑 ADMIN PANEL LOGIN</button>
+  </div>
+</div>
+
+<div class="webviewBox" id="webviewBox">
+  <div class="webviewTop">
+    <button onclick="closeWebView()">← Home</button>
+    <span id="webTitle">WebView</span>
+  </div>
+  <iframe id="webFrame" src=""></iframe>
+</div>
+
+<div class="page" id="home">
+
+<section class="hero">
+  <div class="heroBox">
+    <div>
+      <div class="badge">🌎 Freelancing Global Pro Network Platform 🇧🇩</div>
+      <h1>Smart Future With <br><span>Trending Academy Limited BD</span></h1>
+      <p>
+        Experience a next-generation digital platform featuring online skills development, professional services, student dashboards, gallery management, dedicated support, and smart income solutions.
+        Freelancing is not just a job, it's a journey to financial freedom and limitless opportunities.
+        Success in freelancing begins with learning, practice, and persistence.
+      </p>
+
+      <div class="btns">
+        <button onclick="window.open('https://ariyanth1000-jpg.github.io/New-Student-sign-up/','Create Account')" class="btn gold">Create Account</button>
+        <button onclick="window.open('https://ariyanth1000-jpg.github.io/Student-Login-/','Student Login')" class="btn loginBlue">Student Login</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="stats">
+    <div class="stat"><h2>500+</h2><p>Active Students</p></div>
+    <div class="stat"><h2>50+</h2><p>Digital Services Available</p></div>
+    <div class="stat"><h2>24/7</h2><p>Support Online Mentors</p></div>
+    <div class="stat"><h2>100%</h2><p>Real Earning Platform</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="title">
+    <h2>Our Premium Services</h2>
+    <p>Professional services that combine innovation, quality, and dedication to help you achieve more.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card"><img loading="lazy" src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic2.gif"><h3>✪ Upgrade Your Skills Today</h3><p>From digital learning to professional support, we provide reliable services tailored to your goals.</p></div>
+    <div class="card"><img loading="lazy" src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic3.gif"><h3>∞ Learn • Grow • Succeed</h3><p>Your trusted destination for digital skills, online services, smart support, and growth opportunities.</p></div>
+    <div class="card"><img loading="lazy" src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic4.gif"><h3>✔ Where Skills Meet Success</h3><p>Empowering students, freelancers, and entrepreneurs with smart digital services and professional support.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="title">
+    <h2>Our Achievements</h2>
+    <p>Trending Academy Limited এর গুরুত্বপূর্ণ সফলতা</p>
+  </div>
+
+  <div class="achievements">
+    <div class="achievement"><h3>🏆 Trusted Students 🤝</h3><p>Our achievements reflect the hard work, commitment, and success of our students, team, and community.</p></div>
+    <div class="achievement"><h3>🚀 Fast Support 🎧</h3><p>Turning dreams into achievements through quality training, digital innovation, and professional support.</p></div>
+    <div class="achievement"><h3>🛡️ Secure System 🔒</h3><p>Protecting your data with advanced security solutions, encrypted systems, and trusted digital infrastructure.</p></div>
+    <div class="achievement"><h3>💎 Pay Transactions Security. 💳</h3><p>Fast, secure, and reliable payment solutions designed to ensure a smooth transaction experience for every user.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="banner">
+    <div class="bannerText">
+      <h2>Why Join Us?</h2>
+      <p>Because success is built through the right guidance, valuable skills, dedicated support, and endless opportunities. Join our growing community and take the next step toward a brighter digital future.</p>
+      <br>
+      <button onclick="window.open('https://ariyanth1000-jpg.github.io/New-Student-sign-up/','Join Now')" class="btn gold">Join Now</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="title">
+    <h2>💻 Digital Work Portfolio</h2>
+    <p>Join a community where learning meets opportunity. Develop valuable skills, connect with professionals, and build a brighter future with confidence.</p>
+  </div>
+
+  <div class="gallery">
+
+    <div class="photoCard big">
+      <div class="photo" style="background:url('https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic6.gif') center/cover no-repeat;"></div>
+      <div class="photoInfo">
+        <div class="photoTitle">🌍 Global Freelancing Jobs</div>
+        <div class="photoSub">Connect with international client. </div>
+      </div>
+    </div>
+
+    <div class="photoCard">
+      <div class="photo" style="background:url('https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic5.gif') center/cover no-repeat;"></div>
+      <div class="photoInfo">
+        <div class="photoTitle">Student Service</div>
+        <div class="photoSub">Financial freedom by learning</div>
+      </div>
+    </div>
+
+    <div class="photoCard">
+      <div class="photo" style="background:url('https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic7.gif') center/cover no-repeat;"></div>
+      <div class="photoInfo">
+        <div class="photoTitle">Digital Support</div>
+        <div class="photoSub">24/7 Customer Support.</div>
+      </div>
+    </div>
+
+    <div class="photoCard wide">
+      <div class="photo" style="background:url('https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic8.gif') center/cover no-repeat;"></div>
+      <div class="photoInfo">
+        <div class="photoTitle">Premium Platform</div>
+        <div class="photoSub">Modern secure payment System</div>
+      </div>
+    </div>
+
+    <div class="photoCard">
+      <div class="photo" style="background:url('https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic9.gif') center/cover no-repeat;"></div>
+      <div class="photoInfo">
+        <div class="photoTitle">Small Steps, Big Income.</div>
+        <div class="photoSub">Unlock New Earning Opportunities</div>
+      </div>
+    </div>
+
+    <div class="photoCard">
+      <div class="photo" style="background:url('https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic10.gif') center/cover no-repeat;"></div>
+      <div class="photoInfo">
+        <div class="photoTitle">Smart Dashboard</div>
+        <div class="photoSub">Easy access and clean panel</div>
+      </div>
+    </div>
+
+    <div class="photoCard wide">
+      <div class="photo" style="background:url('https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic11.gif') center/cover no-repeat;"></div>
+      <div class="photoInfo">
+        <div class="photoTitle">Trending Academy</div>
+        <div class="photoSub">Trusted by active students</div>
+      </div>
+    </div>
+
+    <div class="photoCard">
+      <div class="photo" style="background:url('https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic12.gif') center/cover no-repeat;"></div>
+      <div class="photoInfo">
+        <div class="photoTitle">Verified System</div>
+        <div class="photoSub">Secure and real Earning platform</div>
+      </div>
+    </div>
+
+    <div class="photoCard">
+      <div class="photo" style="background:url('https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Pic13.gif') center/cover no-repeat;"></div>
+      <div class="photoInfo">
+        <div class="photoTitle">Earn Smart, Grow Faster.</div>
+        <div class="photoSub">Transform Knowledge into Earnings.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="title">
+    <h2>Student Reviews</h2>
+    <p>The trust and satisfaction of our members inspire us to achieve excellence every day.</p>
+  </div>
+
+  <div class="reviews">
+    <div class="reviewTrack">
+      <div class="review"><h3>Student 01</h3><p>Professional and trustworthy platform. 💎</p></div>
+      <div class="review"><h3>Student 02</h3><p>Friendly support and excellent guidance. 🤝</p></div>
+      <div class="review"><h3>Student 03</h3><p>A great place to learn and grow. 📈</p></div>
+      <div class="review"><h3>Student 04</h3><p>One of the best learning platforms.</p></div>
+      <div class="review"><h3>Student 01</h3><p>Great mentors and outstanding support.</p></div>
+      <div class="review"><h3>Student 02</h3><p>Quality education and excellent guidance.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="title">
+    <h2>FAQ</h2>
+    <p>Frequently Asked Questions</p>
+  </div>
+
+  <div class="faq">
+    <div class="faqItem"><div class="faqQ" onclick="toggleFaq(this)">❓ What services do you provide?</div><div class="faqA">✅ We provide online training, digital services, freelancing support, and skill development opportunities.</div></div>
+    <div class="faqItem"><div class="faqQ" onclick="toggleFaq(this)">❓ How can I join?</div><div class="faqA">✅ Create Account on our platform and follow the instructions to get started.</div></div>
+    <div class="faqItem"><div class="faqQ" onclick="toggleFaq(this)">❓ Is prior experience required?</div><div class="faqA">✅ No, beginners are welcome. We provide guidance for all skill levels.</div></div>
+    <div class="faqItem"><div class="faqQ" onclick="toggleFaq(this)">❓ How can I contact support?</div><div class="faqA">✅ You can reach our support team through the available contact channels on the platform. 🚀</div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="title">
+    <h2>Terms & Privacy</h2>
+    <p>Privacy & Security Guaranteed. 🔐</p>
+  </div>
+
+  <div class="termsBox">
+    <h3>📜 Safe • Secure • Private 🛡️</h3>
+    <p>We are committed to providing a secure, professional, and trustworthy platform for all users. By accessing and using our services, you agree to follow our policies, community guidelines, and terms of use. Users are responsible for maintaining the security of their accounts and ensuring that all provided information is accurate and up to date.
+
+We respect your privacy and take reasonable measures to protect your personal information. Any data collected through our platform is used solely to improve services, provide support, enhance user experience, and maintain platform security. We do not sell, rent, or share personal information with unauthorized third parties.
+
+Users must not engage in fraudulent activities, misuse platform resources, violate applicable laws, or harm other members of the community. Any violation of these terms may result in account suspension or permanent removal.
+
+By continuing to use our platform, you acknowledge and agree to these Terms & Privacy policies. We reserve the right to update, modify, or improve our policies and services at any time to ensure the best experience for our community.
+
+Your trust, privacy, and security remain our highest priorities. 🛡️🔒✨</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footerBox">
+
+    <div class="footerTop">
+      <div class="footerBrand">
+        <h2>🎯 Our Mission</h2>
+        <p>Trending Academy Limited is a trusted digital platform dedicated to online learning, freelancing, and skill development. Empowering individuals to learn, grow, and succeed in the digital world. 🚀</p>
+      </div>
+
+      <div class="footerInfo">
+        <h3>🌟 Our Vision</h3>
+        <p>Empowering the next generation with digital skills, online opportunities, and a supportive learning community.</p>
+      </div>
+    </div>
+
+    <div class="socialGrid">
+      <a class="social" href="GMAIL_LINK_HERE" target="_blank"><img class="logoImg" src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/gmail.gif"><div class="logoFallback">G</div>Gmail</a>
+      <a class="social" href="FACEBOOK_LINK_HERE" target="_blank"><img class="logoImg" src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/facebook.gif"><div class="logoFallback">F</div>Facebook</a>
+      <a class="social" href="WHATSAPP_LINK_HERE" target="_blank"><img class="logoImg" src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/whatsapp.gif"><div class="logoFallback">W</div>WhatsApp</a>
+      <a class="social" href="TIKTOK_LINK_HERE" target="_blank"><img class="logoImg" src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/youtube.gif"><div class="logoFallback">T</div>Youtube</a>
+    </div>
+
+    <div class="badgeStores">
+      <a class="storeBadge" href="GOOGLE_PLAY_LINK_HERE" target="_blank"><img src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Playstore.png"><div><small>GET IT ON</small><strong>Google Play</strong></div></a>
+      <a class="storeBadge" href="APP_STORE_LINK_HERE" target="_blank"><img src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/Appstore.png"><div><small>Download on the</small><strong>App Store</strong></div></a>
+    </div>
+
+    <div class="verifySlider">
+      <div class="verifyTrack">
+        <div class="verifySlide"><h3>✅ Google Play Style</h3><p>Real app store style footer section.</p></div>
+        <div class="verifySlide"><h3>🛡 100% Trusted</h3><p>Mobile and desktop responsive layout.</p></div>
+        <div class="verifySlide"><h3>⭐ Premium Quality</h3><p>Modern digital academy interface.</p></div>
+        <div class="verifySlide"><h3>🔐 Secure Look</h3><p>Professional and trusted platform design.</p></div>
+        <div class="verifySlide"><h3>✅ Google Play Style</h3><p>Real app store style footer section.</p></div>
+        <div class="verifySlide"><h3>🛡 100% Tested</h3><p>Mobile and desktop responsive layout.</p></div>
+        <div class="verifySlide"><h3>⭐ Premium Quality</h3><p>Modern digital academy interface.</p></div>
+        <div class="verifySlide"><h3>🔐 Secure Look</h3><p>Professional and trusted platform design.</p></div>
+      </div>
+    </div>
+
+    <div class="companyCenter">
+
+    <h3>Trending Academy Limited</h3>
+
+    <div class="footerLine">
+        Owners & Office Info
+    </div>
+
+    <div class="footerLine">
+       👑 MD TAMIM & ANU 🌟
+    </div>
+
+    <div class="footerLine">
+        Bhola, Barishal, Dhaka, Bangladesh
+    </div>
+
+    <div class="footerLine">
+        TrendingAcademyLimited@gmail.com
+    </div>
+
+</div>
+
+</div>
+    <div class="footerBottom">
+      <div>© 2026 <span>Trending Academy Limited</span></div>
+      <div>All Rights Reserved • Freelancing Network Platform</div>
+    </div>
+
+  </div>
+</footer>
+
+</div>
+
+<a class="floatWhatsapp"
+href="https://wa.me/8801770755916">
+💬
+</a>
+
+<script>
+function startPage(){
+
+  let progress = 0;
+
+  const bar = document.getElementById("progressBar");
+  const percent = document.getElementById("percent");
+
+  const timer = setInterval(()=>{
+
+    progress++;
+
+    bar.style.width = progress + "%";
+    percent.innerText = progress + "%";
+
+    if(progress >= 100){
+
+      clearInterval(timer);
+
+      document.getElementById("loader").style.opacity="0";
+
+      setTimeout(()=>{
+        document.getElementById("loader").style.display="none";
+      },300);
+
+    }
+
+  },20);
+
+}
+
+function toggleMenu(){
+  document.getElementById("menuBox").classList.toggle("active");
+}
+
+function openWebView(url,title){
+  document.getElementById("webFrame").src=url;
+  document.getElementById("webTitle").innerText=title;
+  document.getElementById("webviewBox").style.display="block";
+  document.getElementById("menuBox").classList.remove("active");
+}
+
+function closeWebView(){
+  document.getElementById("webviewBox").style.display="none";
+  document.getElementById("webFrame").src="";
+  document.getElementById("menuBox").classList.remove("active");
+}
+
+function toggleFaq(el){
+  el.parentElement.classList.toggle("active");
+}
+
+document.querySelectorAll(".logoImg").forEach(img=>{
+  img.onerror=function(){
+    this.style.display="none";
+    const fallback=this.nextElementSibling;
+    if(fallback) fallback.style.display="grid";
+  };
+  img.onload=function(){
+    const fallback=this.nextElementSibling;
+    if(fallback) fallback.style.display="none";
+  };
+});
+
+document.addEventListener("click",function(e){
+  const menu=document.getElementById("menuBox");
+  const icon=document.querySelector(".menuIcon");
+  if(!menu.contains(e.target) && !icon.contains(e.target)){
+    menu.classList.remove("active");
+  }
+});
+</script>
+
+</body>
+</html>
