@@ -1001,41 +1001,57 @@ header{
   .companyGrid{grid-template-columns:1fr}
   .verifySlide{width:260px}
 }
+#welcomePopup{
+  position:fixed;
+  top:22%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:99999;
+  padding:0;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+  backdrop-filter:none;
+  text-align:center;
+  animation:welcomeShow 3s forwards;
+}
+
+#welcomePopup h2{
+  color:#ffd700;
+  margin-bottom:8px;
+  font-size:30px;
+  text-shadow:0 0 15px rgba(255,215,0,.8);
+}
+
+#welcomePopup p{
+  color:#fff;
+  font-size:17px;
+  font-weight:700;
+  text-shadow:0 0 12px rgba(0,0,0,.9);
+}
+
+@keyframes welcomeShow{
+  0%{
+    opacity:0;
+    transform:translate(-50%,-65%);
+  }
+  15%,80%{
+    opacity:1;
+    transform:translate(-50%,-50%);
+  }
+  100%{
+    opacity:0;
+    transform:translate(-50%,-35%);
+    visibility:hidden;
+  }
+}
 </style>
 </head>
 
-<body onload="startPage()">
-
-<div id="loader">
-  <div class="loaderBox">
-
-    <div class="loaderLogo">
-      <img src="https://raw.githubusercontent.com/ariyanth1000-jpg/Pic-1/main/robot.gif" alt="">
-    </div>
-
-    <div class="loaderCircle"></div>
-
-    <h1>Assalamualaikum</h1>
-
-    <p>Welcome to Trending Academy Limited</p>
-
-    <div class="loaderSub">
-     📡 Connecting to our server....
-    </div>
-
-    <div class="loaderSub small">
-      Learn • Grow • Earn • Success
-    </div>
-
-    <div class="progressBox">
-      <div class="progressBar" id="progressBar"></div>
-    </div>
-
-    <div id="percent">0%</div>
-
-  </div>
+<body>
+<div id="welcomePopup">
+  <h2>Assalamualaikum</h2>
 </div>
-
 <div class="bgBase"></div>
 <div class="bgLight"></div>
 <div class="bgBokeh"></div>
@@ -1052,7 +1068,7 @@ header{
 </header>
 
 <div class="ticker">
-  <p>📢 Trending Academy Limited — কাজ করো বন্ধু, কিন্তু নামাজ ছেড়ো না। রিজিকের জন্য পরিশ্রম করো, কিন্তু রিজিকদাতাকে ভুলে যেও না। মনে রেখো, কুল্লু নাফসিন যা ইকাতুল মাউত ( ‎‫كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ‬‎) অর্থ্যাৎ "প্রত্যেক প্রাণীকেই মৃত্যুর স্বাদ গ্রহণ করতে হবে।"</p>
+  <p>📢 Welcome to Trending Academy Limited — কাজ করো বন্ধু, কিন্তু নামাজ ছেড়ো না। রিজিকের জন্য পরিশ্রম করো, কিন্তু রিজিকদাতাকে ভুলে যেও না। মনে রেখো, কুল্লু নাফসিন যা ইকাতুল মাউত ( ‎‫كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ‬‎) অর্থ্যাৎ "প্রত্যেক প্রাণীকেই মৃত্যুর স্বাদ গ্রহণ করতে হবে।"</p>
 </div>
 
 <div class="menuBox" id="menuBox">
@@ -1356,34 +1372,10 @@ href="https://wa.me/8801770755916">
 
 <script>
 function startPage(){
-
-  let progress = 0;
-
-  const bar = document.getElementById("progressBar");
-  const percent = document.getElementById("percent");
-
-  const timer = setInterval(()=>{
-
-    progress++;
-
-    bar.style.width = progress + "%";
-    percent.innerText = progress + "%";
-
-    if(progress >= 100){
-
-      clearInterval(timer);
-
-      document.getElementById("loader").style.opacity="0";
-
-      setTimeout(()=>{
-        document.getElementById("loader").style.display="none";
-      },300);
-
-    }
-
-  },20);
-
+  document.getElementById("loader").style.display="none";
 }
+
+document.addEventListener("DOMContentLoaded", startPage);
 
 function toggleMenu(){
   document.getElementById("menuBox").classList.toggle("active");
